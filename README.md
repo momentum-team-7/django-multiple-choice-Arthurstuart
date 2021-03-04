@@ -24,3 +24,11 @@ cp project/.env.sample project/.env
 ```
 
 If you want to use another directory for your project directory, replace `project` above with the name of your directory.
+
+
+
+Functions we will need:
+1. fn to add snippets from form(form.py)
+2. add/edit/delete fns
+3. fn that searches through inputs for keyword matches
+4. 
