@@ -7,6 +7,7 @@ def snippet_list(request):
     snippets = Snippet.objects.all()
     return render(request, 'index.html', {"snippets":snippets})
 
+@login_required
 def add_snippet(request):
     if request.method == 'POST':
         form = SnippetForm(request.POST)
@@ -15,4 +16,27 @@ def add_snippet(request):
             return HttpResponseRedirect('/')
     else:
         form = SnippetForm()
-    return render(request, 'add_snippet.html', {'form': form})    
+    return render(request, 'add_snippet.html', {'form': form})
+
+
+def edit_snippet(request, pk):
+    snippet = get_object_or_404(Snippet, pk=pk)
+    if request.method == 'POST':
+        form = SnippetForm(request.POST, instace=snippet)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+
+    else:
+        form = SnippetForm(instace=snippet)
+    return render(request, 'edit_snippet.html', {'form': form, 'snippet': snippet})
+
+
+def delete_snippet(request, pk):
+    snippet = get_object_or_404(Snippet, pk=pk)
+    snippet.delete()
+    return HttpResponseRedirect('/')
+
+
+def user_snippet_list(request):
+    pass
