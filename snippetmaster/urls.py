@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
+from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('registration.backends.default.urls')),
-
-
+    path('accounts/', include('registration.backends.simple.urls')),
+    path('', views.snippet_list, name="home"),
+    path('snippets/new', views.add_snippet, name = 'add-snippet')
 ]
 
 if settings.DEBUG:
