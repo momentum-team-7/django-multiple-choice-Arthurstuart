@@ -22,7 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('', views.snippet_list, name="home"),
-    path('snippets/new', views.add_snippet, name = 'add-snippet')
+    path('snippets/new', views.add_snippet, name = 'add-snippet'),
+    path('snippets/<int:pk>/edit', views.edit_snippet, name="edit-snippet"),
+
 ]
 
 if settings.DEBUG:
