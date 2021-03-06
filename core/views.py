@@ -38,3 +38,13 @@ def delete_snippet(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
     snippet.delete()
     return HttpResponseRedirect('/')
+
+
+def snippet_profile(request):
+    pass
+
+
+def snippet_user_submitted(request):
+    user = request.user
+    snippets = Snippet.objects.filter(user=user)
+    return render(request, 'submitted.html', {"snippets": snippets})
