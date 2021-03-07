@@ -1,5 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import TemplateView, ListView
+from django.db.models import Q
+
 from .models import Snippet
 from .forms import SnippetForm
 from django.http import HttpResponseRedirect
@@ -36,10 +39,12 @@ def edit_snippet(request, pk):
     return render(request, 'edit_snippet.html', {'form': form, 'snippet':snippet })
 
 
+
 def delete_snippet(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
     snippet.delete()
     return HttpResponseRedirect('/')
+
 
 
 def snippet_profile(request):
@@ -50,3 +55,18 @@ def snippet_user_submitted(request):
     user = request.user
     snippets = Snippet.objects.filter(user=user)
     return render(request, 'submitted.html', {"snippets": snippets})
+
+
+class SearchResultsView(ListView):
+    model = Snippet
+    template_name = 'search_results.html'    
+    # queryset = Snippet.objects.filter(title__icontains='obo')
+    # queryset = Snippet.objects.filter(language__icontains='obo')
+    # queryset = Snippet.objects.filter(language__title__icontains='obo') ****having issues with joining names, tabling for now. 
+   
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        snippet_list = Snippet.objects.filter(
+            Q(language__icontains= query) | Q(title__icontains= query) | Q(description__icontains = query)
+            )
+        return snippet_list    

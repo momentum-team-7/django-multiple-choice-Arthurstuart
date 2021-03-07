@@ -1,14 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 <form action="{% url 'edit-snippet' pk=snippet.pk %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit">
+<<<<<<< HEAD
     
 </form>
 
 <a href="{% url 'delete-snippet' pk=snippet.pk %}">Delete Snippet</a>
 
+=======
+
+    
+
+
+</form>
+>>>>>>> master
 {% endblock content %}

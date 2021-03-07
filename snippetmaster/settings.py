@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
     # Third-party
+    'environ',
     'debug_toolbar',
     'django_extensions',
 
@@ -141,3 +143,5 @@ INTERNAL_IPS = [
 ]
 
 ACCOUNT_ACTIVATION_DAYS = 7
+
+# LOGIN_REDIRECT_URL = '/'
