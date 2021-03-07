@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href='/'>Search for more Snippets</a>
+
+
+{% for snippet in snippets %}
+
+
+{{snippet}}
+
+
+{% endfor %}
+{% endblock %}

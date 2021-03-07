@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <form action="{% url 'edit-snippet' pk=snippet.pk %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit">
 
     
-
-
 </form>
+
+<a href="{% url 'delete-snippet' pk=snippet.pk %}">Delete Snippet</a>
+
 {% endblock content %}

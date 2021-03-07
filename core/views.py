@@ -1,20 +1,25 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
+
 from .models import Snippet
+from .forms import SnippetForm
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def snippet_list(request):
     snippets = Snippet.objects.all()
     return render(request, 'index.html', {"snippets":snippets})
 
-@login_required
+
 def add_snippet(request):
     if request.method == 'POST':
         form = SnippetForm(request.POST)
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
             return HttpResponseRedirect('/')
     else:
         form = SnippetForm()
@@ -24,14 +29,15 @@ def add_snippet(request):
 def edit_snippet(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
     if request.method == 'POST':
-        form = SnippetForm(request.POST, instace=snippet)
+        form = SnippetForm(request.POST, instance=snippet)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/')
 
     else:
-        form = SnippetForm(instace=snippet)
-    return render(request, 'edit_snippet.html', {'form': form, 'snippet': snippet})
+        form = SnippetForm(instance=snippet)
+    return render(request, 'edit_snippet.html', {'form': form, 'snippet':snippet })
+
 
 
 def delete_snippet(request, pk):
@@ -40,8 +46,16 @@ def delete_snippet(request, pk):
     return HttpResponseRedirect('/')
 
 
-def user_snippet_list(request):
+
+def snippet_profile(request):
     pass
+
+
+def snippet_user_submitted(request):
+    user = request.user
+    snippets = Snippet.objects.filter(user=user)
+    return render(request, 'submitted.html', {"snippets": snippets})
+
 
 class SearchResultsView(ListView):
     model = Snippet
