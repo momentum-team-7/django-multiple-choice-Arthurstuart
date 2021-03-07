@@ -44,9 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_gravatar',
+
 
     # Third-party
+    'environ',
     'debug_toolbar',
     'django_extensions',
 
