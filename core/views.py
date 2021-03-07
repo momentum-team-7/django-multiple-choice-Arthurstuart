@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.views.generic import TemplateView, ListView
 from .models import Snippet
 
 # Create your views here.
@@ -40,3 +41,7 @@ def delete_snippet(request, pk):
 
 def user_snippet_list(request):
     pass
+
+class SearchResultsView(ListView):
+    model = Snippet
+    template_name = 'search_results.html'    

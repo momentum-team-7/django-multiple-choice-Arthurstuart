@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
 from core import views
+from core.views import SearchResultsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +25,7 @@ urlpatterns = [
     path('', views.snippet_list, name="home"),
     path('snippets/new', views.add_snippet, name = 'add-snippet'),
     path('snippets/<int:pk>/edit', views.edit_snippet, name="edit-snippet"),
+    path('search/', SearchResultsView.as_view(), name='search_results'),
 
 ]
 
