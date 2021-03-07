@@ -14,7 +14,9 @@ def add_snippet(request):
     if request.method == 'POST':
         form = SnippetForm(request.POST)
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
             return HttpResponseRedirect('/')
     else:
         form = SnippetForm()

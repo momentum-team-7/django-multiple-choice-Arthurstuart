@@ -5,4 +5,4 @@ from .models import Snippet
 class SnippetForm(forms.ModelForm):
     class Meta:
         model = Snippet
-        fields = ['title', 'language', 'description', 'script', 'user']
+        fields = ['title', 'language', 'description', 'script']
