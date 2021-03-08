@@ -30,8 +30,8 @@ urlpatterns = [
     path('snippets/<int:pk>/edit', views.edit_snippet, name="edit-snippet"),
     path('snippets/<int:pk>/delete', views.delete_snippet, name="delete-snippet"),
     path('submitted/', views.snippet_user_submitted, name="submitted-snippet"),
-    path('search/', SearchResultsView.as_view(), name='search-results'),
-
+    path('search/', SearchResultsView.as_view(), name='search_results'),
+    # path('snippets/<int:pk>/save', views.save_snippet, name="save-snippet"),
 
 
 ]
