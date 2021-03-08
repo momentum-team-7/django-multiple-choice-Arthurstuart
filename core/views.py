@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 
-from .models import Snippet
-from .forms import SnippetForm
+from .models import Snippet #,User
+from .forms import SnippetForm #,Userform
 from django.http import HttpResponseRedirect
 
 # Create your views here.
@@ -12,6 +12,15 @@ def snippet_list(request):
     snippets = Snippet.objects.all()
     return render(request, 'index.html', {"snippets":snippets})
 
+def homepage_render(request):
+    snippets = Snippet.objects.all()    
+    return render(request, 'user_home.html', {"snippets":snippets})    
+
+# def page_appender(request): #Eventually you can have input var url
+#     users = User.objects.all()
+#     teststr  = "testing this out"
+#     return render(request, 'profile.html', {"users":users})
+#     # return render(request, 'profile.html', {"users":users})
 
 def add_snippet(request):
     if request.method == 'POST':

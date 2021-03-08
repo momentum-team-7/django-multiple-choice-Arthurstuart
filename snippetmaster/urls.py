@@ -25,6 +25,7 @@ urlpatterns = [
     path('accounts/', include('registration.backends.simple.urls')),
     path('accounts/login/', auth_views.LoginView.as_view(), name= 'accounts-login'),
     path('', views.snippet_list, name="home"),
+    path('user_home/', views.homepage_render, name="user-home"),
     path('snippets/new', views.add_snippet, name = 'add-snippet'),
     path('snippets/<int:pk>/edit', views.edit_snippet, name="edit-snippet"),
     path('snippets/<int:pk>/delete', views.delete_snippet, name="delete-snippet"),

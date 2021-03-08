@@ -81,7 +81,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
-    },
+    }, 
 ]
 
 WSGI_APPLICATION = 'snippetmaster.wsgi.application'
@@ -144,4 +144,5 @@ INTERNAL_IPS = [
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
-# LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/user_home/'
+
