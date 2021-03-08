@@ -70,3 +70,14 @@ class SearchResultsView(ListView):
             Q(language__icontains= query) | Q(title__icontains= query) | Q(description__icontains = query)
             )
         return snippet_list    
+
+
+# Grant & Tatiana's code for Saving a Snippet to a User's DB
+# def save_snippet(request, pk):
+#     snippet = get_object_or_404(Snippet, pk=pk)
+#     snippet.pk = None
+#     snippet.user = request.user
+#     snippet.save()
+#     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    # according to Grant, the final line here redirects the User to the prior page 
+    # they were on before clicking save on the snippet (obv we can change this to w/e we need)
