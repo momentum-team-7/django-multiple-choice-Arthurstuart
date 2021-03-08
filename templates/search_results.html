@@ -1,8 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <h1> Search Results </h1>
 <ul>
     {% for snippet in object_list %}
         <li> 
             {{snippet}}
+            {{snippet.description}}
         </li>
     {% endfor %}
 </ul>
+
+{% endblock %}
