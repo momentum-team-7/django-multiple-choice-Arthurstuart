@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<p> here's all the snippets (this is from index.html line 4)</p>
 {% for snippet in snippets %}
 {{snippet}}
 {% endfor %}
+
+<h1> Why don't you give search a try </h1>
+    <div>
+        <form action="{% url 'search-results' %}" method="get">
+            <input name="q" type="text" placeholder="Search...">
+        </form>
+    </div>
+
+<h2>or you could login or sign up</h2> 
+    <div>
+        <form action="{% url 'accounts-login' %}" method="get">
+            <button type="submit">Log In/Register</button>
+        </form>
+    </div>
+
+
+
 {% endblock %}
