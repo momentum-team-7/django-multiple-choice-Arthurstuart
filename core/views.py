@@ -22,6 +22,8 @@ def homepage_render(request):
 #     return render(request, 'profile.html', {"users":users})
 #     # return render(request, 'profile.html', {"users":users})
 
+
+@login_required
 def add_snippet(request):
     if request.method == 'POST':
         form = SnippetForm(request.POST)
@@ -48,18 +50,13 @@ def edit_snippet(request, pk):
     return render(request, 'edit_snippet.html', {'form': form, 'snippet':snippet })
 
 
-
 def delete_snippet(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
     snippet.delete()
     return HttpResponseRedirect('/')
 
 
-
-def snippet_profile(request):
-    pass
-
-
+@login_required
 def snippet_user_submitted(request):
     user = request.user
     snippets = Snippet.objects.filter(user=user)
@@ -72,7 +69,7 @@ class SearchResultsView(ListView):
     # queryset = Snippet.objects.filter(title__icontains='obo')
     # queryset = Snippet.objects.filter(language__icontains='obo')
     # queryset = Snippet.objects.filter(language__title__icontains='obo') ****having issues with joining names, tabling for now. 
-   
+
     def get_queryset(self):
         query = self.request.GET.get('q')
         snippet_list = Snippet.objects.filter(
