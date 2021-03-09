@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 
-from .models import Snippet #,User
+from .models import Snippet, User
 from .forms import SnippetForm #,Userform
 from django.http import HttpResponseRedirect
 
@@ -63,8 +63,17 @@ def snippet_profile(request):
 def snippet_user_submitted(request):
     user = request.user
     snippets = Snippet.objects.filter(user=user)
-    return render(request, 'submitted.html', {"snippets": snippets})
+    return render(request, 'submitted.html',  {"snippets": snippets})
 
+
+# def snippet_networkfeed(request):
+#     user = request.user.all
+#     snippets = Snippet.objects.all
+#     return render(request, 'network-feed.html', {"user": user} {"snippets": snippets})
+
+def user_list(request):
+    users = User.objects.all()
+    return render(request, 'network-feed.html', {"users":users})
 
 class SearchResultsView(ListView):
     model = Snippet

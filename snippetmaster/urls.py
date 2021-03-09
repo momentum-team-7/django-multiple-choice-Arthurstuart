@@ -31,6 +31,7 @@ urlpatterns = [
     path('snippets/<int:pk>/delete', views.delete_snippet, name="delete-snippet"),
     path('submitted/', views.snippet_user_submitted, name="submitted-snippet"),
     path('search/', SearchResultsView.as_view(), name='search-results'),
+    path('network-feed/', views.user_list, name="network-feed"),
 
 
 ]

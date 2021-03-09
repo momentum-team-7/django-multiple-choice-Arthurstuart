@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Snippet Activity from Others</h1>
+<ul>
+    {% for user in users %}
+        <li> 
+            {{user}}
+            {{ user.snippets|length }}
+        </li>
+    {% endfor %}
+</ul>
+
+<a href='/'>Search for more Snippets</a>
+{% endblock %}
