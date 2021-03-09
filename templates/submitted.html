@@ -6,8 +6,18 @@
 
 {% for snippet in snippets %}
 
+<div class="snippet-card">
+    <div class="snippet-title">{{snippet}}</div>
+    <div class="snippet-language">{{snippet.language}}</div>
+    <div class="snippet-description">{{snippet.description}}</div>
+        <pre>
+            <code class="language-{{snippet.language}}">
+            {{snippet.script}}
+            </code>
+        </pre>
+        <div class="snippet-user">Author: {{snippet.user}}</div>
+</div>
 
-{{snippet}}
 
 
 {% endfor %}
