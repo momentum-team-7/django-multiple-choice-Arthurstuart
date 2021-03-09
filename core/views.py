@@ -51,6 +51,7 @@ def snippet_profile(request):
     pass
 
 
+@login_required 
 def snippet_user_submitted(request):
     user = request.user
     snippets = Snippet.objects.filter(user=user)

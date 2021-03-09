@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
+{% load gravatar %}
 {% block content %}
 <a href='/'>Search for more Snippets</a>
-
+<img src="{% gravatar_url user.email 150 %}"/>
 
 {% for snippet in snippets %}
 
