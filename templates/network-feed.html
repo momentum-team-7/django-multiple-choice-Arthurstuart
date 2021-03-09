@@ -2,14 +2,15 @@
 
 {% block content %}
 <h1>Snippet Activity from Others</h1>
-<ul>
+
     {% for user in users %}
-        <li> 
-            {{user}}
-            {{ user.snippets|length }}
-        </li>
+        <div class="user-name">{{user}}</div>
+        <div class="user-amtofsnippets">{{ user.snippets|length }}</div>
+    </div>    
+
     {% endfor %}
-</ul>
+
+
 
 <a href='/'>Search for more Snippets</a>
 {% endblock %}
