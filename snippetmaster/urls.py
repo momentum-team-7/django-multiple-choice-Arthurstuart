@@ -35,6 +35,7 @@ urlpatterns = [
     path('user_list/', views.user_list_count, name="user-list-count"),
     path('snippets/<int:pk>/save', views.save_snippet, name="save-snippet"),
     path('snippets/<int:pk>/added', views.save_snippet , name="snippet-added"),
+    path('userprofile/<int:pk>/', views.indivdual_user, name="userprofile"),
 
 ]
 

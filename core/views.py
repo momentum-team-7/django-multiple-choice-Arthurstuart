@@ -54,6 +54,9 @@ def delete_snippet(request, pk):
 def snippet_user_submitted(request):
     return render(request, 'submitted.html',  {"snippets": request.user.snippets_authored.all()})
 
+def indivdual_user(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    return render(request, 'userprofile.html', {"user": user})
 
 def user_list(request):
     users = User.objects.all()
