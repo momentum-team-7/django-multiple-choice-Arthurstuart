@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 
+{% load gravatar %}
 {% block content %}
-<h1>Snippet Activity from Others</h1>
+<h1>Snippet Activity from the Rest of the Community</h1>
 
     {% for user in users %}
-        <div class="user-name">{{user}}</div>
+    <div class="user-card">
+        <img src="https://secure.gravatar.com/avatar/hash.jpg?size=150" width="80" height="80" alt="user@example.com" />
+        <h3 class="user-name">{{user}}</h3>
         <div class="user-amtofsnippets">{{ user.snippets|length }}</div>
     </div>    
 
     {% endfor %}
 
-
-
-<a href='/'>Search for more Snippets</a>
+    
+<h2>Search for more Snippets</h2>
+    <button type="search-button">
+        <a href="/">Search</a>
+    </button>
+    
 {% endblock %}

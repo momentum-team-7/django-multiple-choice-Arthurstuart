@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models import Count
 
 Languages = (
     ('HTML', 'HTML'),
@@ -17,12 +18,11 @@ class Snippet(models.Model):
     language = models.CharField(max_length=20, choices=Languages)
     description = models.CharField(max_length=300)
     script = models.TextField(max_length=1000)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="snippets")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     tags = models.ManyToManyField('Tag', blank=True)
 
     def __str__(self):
         return self.title
-
 
 class Tag(models.Model):
     tag = models.CharField(max_length=60, unique=True)
