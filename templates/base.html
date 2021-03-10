@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://latex.now.sh/style.css">
     <link rel="stylesheet" href="{% static 'css/prism.css' %}">
     <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
     <script src="{% static 'Javascript/prism.js' %}" async></script>
@@ -12,7 +13,7 @@
     <title>Snippet Mainpage</title>
 </head>
 <body>
-
+    <div class="container">
     <div class="topnav">
 
         <a href="/">Search</a>
@@ -29,10 +30,7 @@
         {% endif %}
 
     </div>
-
-    <h1>Welcome to Snippetmaster </h1>
-    <p>The home of all your code snippets - and everybody else's </p>
-    <div class='content'>
+    <div class="content">
         {% block content %}
         
         {% endblock %}
