@@ -82,6 +82,7 @@ def user_list_count(request):
     top_users = User.objects.all() \
     .annotate(num_snippets=Count('snippet')) \
     .order_by("-num_snippets")
+    top_users = top_users[:5]
     return render(request, 'user_list.html', {"top_users": top_users})
 
 
