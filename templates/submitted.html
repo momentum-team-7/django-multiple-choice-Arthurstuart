@@ -15,7 +15,9 @@
             {{snippet.script}}
             </code>
         </pre>
-        {% if snippet.user == request.user or request.user.is_superuser %}
+        {% if snippet.user != request.user or request.user.is_superuser %}
+        <a href="{% url 'save-snippet' pk=snippet.pk %}">Add Snippet to My Library</a>
+        {% elif snippet.user == request.user or request.user.is_superuser %}
         <a href="{% url 'edit-snippet' pk=snippet.pk %}">Edit Snippet</a>
         <a href="{% url 'delete-snippet' pk=snippet.pk %}">Delete Snippet</a>
         {% endif %}

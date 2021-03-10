@@ -5,10 +5,26 @@
 
 
 <h1> you are logged in as... </h1>
-<p> user placeholder </p>
+<p> {{request.user}} </p>
 
 {% for snippet in snippets %}
-    {{snippet}}
+<div class="snippet-card">
+    <div class="snippet-title">{{snippet}}</div>
+    <div class="snippet-language">{{snippet.language}}</div>
+    <div class="snippet-description">{{snippet.description}}</div>
+        <pre>
+            <code class="language-{{snippet.language}}">
+            {{snippet.script}}
+            </code>
+        </pre>
+        {% if snippet.user != request.user or request.user.is_superuser %}
+        <a href="{% url 'save-snippet' pk=snippet.pk %}">Add Snippet to My Library</a>
+        {% elif snippet.user == request.user or request.user.is_superuser %}
+        <a href="{% url 'edit-snippet' pk=snippet.pk %}">Edit Snippet</a>
+        <a href="{% url 'delete-snippet' pk=snippet.pk %}">Delete Snippet</a>
+        {% endif %}
+        <div class="snippet-user">Author: {{snippet.user}}</div>
+</div>
 {% endfor %}
 
 
