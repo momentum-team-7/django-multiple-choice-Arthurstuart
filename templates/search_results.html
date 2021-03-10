@@ -16,7 +16,11 @@
             {{snippet.script}}
             </code>
         </pre>
-        <div class="snippet-user">{{snippet.user}}</div>
+        {% if snippet.user == request.user %}
+        <a href="{% url 'edit-snippet' pk=snippet.pk %}">Edit Snippet</a>
+        <a href="{% url 'delete-snippet' pk=snippet.pk %}">Delete Snippet</a>
+        {% endif %}
+        <div class="snippet-user">Author: {{snippet.user}}</div>
 </div>
 {% endfor %}
 {% endblock %}

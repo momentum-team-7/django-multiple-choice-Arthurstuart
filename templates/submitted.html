@@ -3,11 +3,25 @@
 {% block content %}
 <a href='/'>Search for more Snippets</a>
 
-
+<p> Your snippets: </p>
 {% for snippet in snippets %}
 
+<div class="snippet-card">
+    <div class="snippet-title">{{snippet}}</div>
+    <div class="snippet-language">{{snippet.language}}</div>
+    <div class="snippet-description">{{snippet.description}}</div>
+        <pre>
+            <code class="language-{{snippet.language}}">
+            {{snippet.script}}
+            </code>
+        </pre>
+        {% if snippet.user == request.user or request.user.is_superuser %}
+        <a href="{% url 'edit-snippet' pk=snippet.pk %}">Edit Snippet</a>
+        <a href="{% url 'delete-snippet' pk=snippet.pk %}">Delete Snippet</a>
+        {% endif %}
+        <div class="snippet-user">Author: {{snippet.user}}</div>
+</div>
 
-{{snippet}}
 
 
 {% endfor %}
