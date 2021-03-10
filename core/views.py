@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
-
+from django.db.models import Count
 from .models import Snippet, User
 from .forms import SnippetForm #,Userform
 from django.http import HttpResponseRedirect
@@ -78,10 +78,16 @@ class SearchResultsView(ListView):
         return snippet_list
 
 
-def user_list(request):
-    users = User.objects.all()
-    return render(request, 'user_list.html', {"users":users})
+# def user_list_count(request):
+#     top_users = User.objects.annotate(num_snippets=Count('snippet'))
+#     return render(request, 'user_list.html')
 
+
+def user_list_count(request):
+    top_users = User.objects.all() \
+    .annotate(num_snippets=Count('snippet')) \
+    .order_by('-num_snippets')
+    return render(request, 'user_list.html', {"top_users": top_users})
 
 
 # Grant & Tatiana's code for Saving a Snippet to a User's DB
