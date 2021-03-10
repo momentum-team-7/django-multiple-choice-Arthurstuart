@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'environ',
     'debug_toolbar',
     'django_extensions',
+    'django_gravatar',
+    'star_ratings',
+
 
     # Project-specific
     'core',

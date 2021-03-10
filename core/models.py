@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models import Count
 
 Languages = (
     ('HTML', 'HTML'),
@@ -22,7 +23,6 @@ class Snippet(models.Model):
 
     def __str__(self):
         return self.title
-
 
 class Tag(models.Model):
     tag = models.CharField(max_length=60, unique=True)

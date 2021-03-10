@@ -1,8 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
-from django.db.models import Q
-from django.db.models import Count
+from django.db.models import Q, Count
 from .models import Snippet, User
 from .forms import SnippetForm #,Userform
 from django.http import HttpResponseRedirect
@@ -60,8 +59,23 @@ def delete_snippet(request, pk):
 def snippet_user_submitted(request):
     user = request.user
     snippets = Snippet.objects.filter(user=user)
-    return render(request, 'submitted.html', {"snippets": snippets})
+    return render(request, 'submitted.html',  {"snippets": snippets})
 
+
+# def snippet_networkfeed(request):
+#     user = request.user.all
+#     snippets = Snippet.objects.all
+#     return render(request, 'network-feed.html', {"user": user} {"snippets": snippets})
+
+def user_list(request):
+    users = User.objects.all()
+    return render(request, 'network-feed.html', {"users":users})
+
+def top_user(request):
+    top_user = User.objects.all() \
+        .annotate(num_snippets=Count('snippet')) \
+        .order_by('-num_snippets')
+    return render(request, 'network-feed.html', {"top_user": top_user})
 
 class SearchResultsView(ListView):
     model = Snippet
