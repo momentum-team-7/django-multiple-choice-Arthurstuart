@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<p> Search for snippets... <p>
+<h1>Welcome to Snippetmaster </h1>
+<p>The home of all your code snippets - and everybody else's </p>
     <div>
         <form action="{% url 'search-results' %}" method="get">
             <input name="q" type="text" placeholder="Search...">
-            <button type="submit">Go</button>
+            <button type="submit">GO</button>
         </form>
         </form>
     </div>
