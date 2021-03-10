@@ -17,10 +17,11 @@
 
         <a href="/">Search</a>
         <a href="/user_list/">SnippetMasters</a>
+        <a href="/network_feed/">Community</a>
         {% if user.is_authenticated %}
-        <a href="/user_home">My Snippets</a>
-        <a href="/snippets/new">New Snippet</a>
+        <a href="/user_home">Library</a>
         <a href="/submitted/">My Submissions</a>
+        <a href="/snippets/new">New Snippet</a>
         {% endif %}
         {% if user.is_authenticated %}
         <a href="/accounts/logout">Logout</a>

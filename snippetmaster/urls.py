@@ -36,8 +36,6 @@ urlpatterns = [
     path('snippets/<int:pk>/save', views.save_snippet, name="save-snippet"),
     path('snippets/<int:pk>/added', views.save_snippet , name="snippet-added"),
 
-
-
 ]
 
 if settings.DEBUG:
