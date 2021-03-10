@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
-
-from .models import Snippet #,User
+from django.db.models import Count
+from .models import Snippet, User
 from .forms import SnippetForm #,Userform
 from django.http import HttpResponseRedirect
 
@@ -43,7 +43,7 @@ def edit_snippet(request, pk):
         form = SnippetForm(request.POST, instance=snippet)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/user_home/')
 
     else:
         form = SnippetForm(instance=snippet)
@@ -53,7 +53,7 @@ def edit_snippet(request, pk):
 def delete_snippet(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
     snippet.delete()
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -75,16 +75,21 @@ class SearchResultsView(ListView):
         snippet_list = Snippet.objects.filter(
             Q(language__icontains= query) | Q(title__icontains= query) | Q(description__icontains = query)
             )
-        return snippet_list    
+        return snippet_list
 
 
-# Grant & Tatiana's code for Saving a Snippet to a User's DB
+def user_list_count(request):
+    top_users = User.objects.all() \
+    .annotate(num_snippets=Count('snippet')) \
+    .order_by("-num_snippets")
+    return render(request, 'user_list.html', {"top_users": top_users})
+
+
+
+
 def save_snippet(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
     snippet.pk = None
     snippet.user = request.user
     snippet.save()
     return render(request, 'snippet_added.html')
-    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    # according to Grant, the final line here redirects the User to the prior page 
-    # they were on before clicking save on the snippet (obv we can change this to w/e we need)
