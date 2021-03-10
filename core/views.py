@@ -31,7 +31,7 @@ def add_snippet(request):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/submitted/')
     else:
         form = SnippetForm()
     return render(request, 'add_snippet.html', {'form': form})
@@ -85,11 +85,12 @@ def user_list(request):
 
 
 # Grant & Tatiana's code for Saving a Snippet to a User's DB
-# def save_snippet(request, pk):
-#     snippet = get_object_or_404(Snippet, pk=pk)
-#     snippet.pk = None
-#     snippet.user = request.user
-#     snippet.save()
-#     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+def save_snippet(request, pk):
+    snippet = get_object_or_404(Snippet, pk=pk)
+    snippet.pk = None
+    snippet.user = request.user
+    snippet.save()
+    return render(request, 'snippet_added.html')
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     # according to Grant, the final line here redirects the User to the prior page 
     # they were on before clicking save on the snippet (obv we can change this to w/e we need)
