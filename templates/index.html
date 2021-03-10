@@ -2,20 +2,14 @@
 
 {% block content %}
 
-<h1> Why don't you give search a try </h1>
+<p> Search for snippets... <p>
     <div>
         <form action="{% url 'search-results' %}" method="get">
             <input name="q" type="text" placeholder="Search...">
+            <button type="submit">Go</button>
+        </form>
         </form>
     </div>
-
-<h2>or you could login or sign up</h2> 
-    <div>
-        <form action="{% url 'accounts-login' %}" method="get">
-            <button type="submit">Log In/Register</button>
-        </form>
-    </div>
-
 
 
 {% endblock %}
