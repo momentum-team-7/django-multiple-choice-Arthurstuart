@@ -15,12 +15,6 @@ def homepage_render(request):
     snippets = Snippet.objects.all()    
     return render(request, 'user_home.html', {"snippets":snippets})    
 
-# def page_appender(request): #Eventually you can have input var url
-#     users = User.objects.all()
-#     teststr  = "testing this out"
-#     return render(request, 'profile.html', {"users":users})
-#     # return render(request, 'profile.html', {"users":users})
-
 
 @login_required
 def add_snippet(request):
@@ -28,6 +22,7 @@ def add_snippet(request):
         form = SnippetForm(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
+            instance.author = request.user
             instance.user = request.user
             instance.save()
             return HttpResponseRedirect('/submitted/')
@@ -57,32 +52,22 @@ def delete_snippet(request, pk):
 
 @login_required
 def snippet_user_submitted(request):
-    user = request.user
-    snippets = Snippet.objects.filter(user=user)
-    return render(request, 'submitted.html',  {"snippets": snippets})
+    return render(request, 'submitted.html',  {"snippets": request.user.snippets_authored.all()})
 
-
-# def snippet_networkfeed(request):
-#     user = request.user.all
-#     snippets = Snippet.objects.all
-#     return render(request, 'network-feed.html', {"user": user} {"snippets": snippets})
 
 def user_list(request):
     users = User.objects.all()
-    return render(request, 'network-feed.html', {"users":users})
+    return render(request, 'network_feed.html', {"users":users})
 
 def top_user(request):
     top_user = User.objects.all() \
         .annotate(num_snippets=Count('snippet')) \
         .order_by('-num_snippets')
-    return render(request, 'network-feed.html', {"top_user": top_user})
+    return render(request, 'network_feed.html', {"top_user": top_user})
 
 class SearchResultsView(ListView):
     model = Snippet
     template_name = 'search_results.html'    
-    # queryset = Snippet.objects.filter(title__icontains='obo')
-    # queryset = Snippet.objects.filter(language__icontains='obo')
-    # queryset = Snippet.objects.filter(language__title__icontains='obo') ****having issues with joining names, tabling for now. 
 
     def get_queryset(self):
         query = self.request.GET.get('q')
@@ -94,12 +79,12 @@ class SearchResultsView(ListView):
 
 def user_list_count(request):
     top_users = User.objects.all() \
-    .annotate(num_snippets=Count('snippet')) \
+    .annotate(num_snippets=Count('snippets_authored')) \
     .order_by("-num_snippets")
-    top_users = top_users[:5]
-    return render(request, 'user_list.html', {"top_users": top_users})
-
-
+    top_user  = top_users[0]
+    next_five = top_users[1:4]
+    top_users = top_users[:10]
+    return render(request, 'user_list.html',{'top_user':top_user, 'next_five':next_five})
 
 
 def save_snippet(request, pk):

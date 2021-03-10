@@ -2,14 +2,13 @@
 
 {% block content %}
 
-<p>The Snippetmasters are... </p>
+<p>The Snippetmaster is... </p>
 
-{% for user in top_users %}
+{{top_user}}
 
+<p>Coming for the throne... </p>
+{% for user in next_five %}
 {{user}} {{user.num_snippets}}
-
-
-
 {% endfor %}
 
 {% endblock %}

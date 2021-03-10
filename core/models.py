@@ -18,7 +18,8 @@ class Snippet(models.Model):
     language = models.CharField(max_length=20, choices=Languages)
     description = models.CharField(max_length=300)
     script = models.TextField(max_length=1000)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='snippets_owned')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='snippets_authored')
     tags = models.ManyToManyField('Tag', blank=True)
 
     def __str__(self):
