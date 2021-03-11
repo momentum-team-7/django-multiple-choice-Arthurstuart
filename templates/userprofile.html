@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 
+{% load gravatar %}
 {% block content %}
-<a href='/'>Search for more Snippets</a>
 
-<p> Your snippets: </p>
+<h2 class="username-title">{{user}}</h2>
+<h2> Your snippets: </h2>
 {% for snippet in user.snippets_authored.all %}
 
 <div class="snippet-card">
-    <div class="snippet-title">{{snippet}}</div>
-    <div class="snippet-language">{{snippet.language}}</div>
-    <div class="snippet-description">{{snippet.description}}</div>
+    <img src="https://secure.gravatar.com/avatar/hash.jpg?size=150" width="150" height="150" alt="user@example.com" />
+    <h3 class="snippet-title">Title of your snippet:</h3>
+        {{snippet}}
+    <h3 class="snippet-language">Language:</h3>
+        {{snippet.language}}
+    <h3 class="snippet-description">Contents of your snippet:</h3>
+       {{snippet.description}}
         <pre>
             <code class="language-{{snippet.language}}">
             {{snippet.script}}

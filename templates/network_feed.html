@@ -8,9 +8,9 @@
     <div class="user-card">
         <img src="https://secure.gravatar.com/avatar/hash.jpg?size=150" width="80" height="80" alt="user@example.com" />
         <h3 class="user-name">{{user}}</h3>
-        <div class="user-amtofsnippets">{{ user.snippets|length }}</div>
+        <a href="{% url 'userprofile' userprofile.pk %}">Visit Profile</a>
+        <div class="user-amtofsnippets">{{user}} {{user.num_snippets}}</div>
     </div>    
-
     {% endfor %}
 
     

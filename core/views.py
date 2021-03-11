@@ -58,8 +58,10 @@ def indivdual_user(request, pk):
     user = get_object_or_404(User, pk=pk)
     return render(request, 'userprofile.html', {"user": user})
 
-def user_list(request):
-    users = User.objects.all()
+def user_list(self,request, pk):
+    users = User.objects.all()('users', 'pk') \
+    .annotate(num_ofsnippets=Count('snippets_authored')) \
+    .order_by("-num_ofsnippets")
     return render(request, 'network_feed.html', {"users":users})
 
 def top_user(request):
@@ -88,7 +90,6 @@ def user_list_count(request):
     next_five = top_users[1:4]
     top_users = top_users[:10]
     return render(request, 'user_list.html',{'top_user':top_user, 'next_five':next_five})
-
 
 def save_snippet(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
