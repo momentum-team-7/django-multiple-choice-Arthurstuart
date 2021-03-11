@@ -3,14 +3,14 @@
 
 {% block content %}
 
-<h1> Search Results </h1>
+<h2> Search Results </h2>
 
 {% for snippet in object_list %}
 
 <div class="snippet-card">
-    <div class="snippet-title">{{snippet}}</div>
-    <div class="snippet-language">{{snippet.language}}</div>
-    <div class="snippet-description">{{snippet.description}}</div>
+    <div class="snippet-title">Title: {{snippet}}</div>
+    <div class="snippet-language">Language: {{snippet.language}}</div>
+    <div class="snippet-description">Description: {{snippet.description}}</div>
         <pre>
             <code class="language-{{snippet.language}}">
             {{snippet.script}}
@@ -24,7 +24,7 @@
         <a href="{% url 'edit-snippet' pk=snippet.pk %}">Edit Snippet</a>
         <a href="{% url 'delete-snippet' pk=snippet.pk %}">Delete Snippet</a>
         {% endif %}
-        <div class="snippet-user">replacethis: {{snippet.user}}</div>
+        <div class="snippet-user">Author: {{snippet.user}}</div>
 </div>
 {% endfor %}
 {% endblock %}

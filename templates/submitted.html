@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a href='/'>Search for more Snippets</a>
+<br>
+<div align="center"><a href='/'>Search for more Snippets</a></div>
 
-<p> Your snippets: </p>
+<div align="center"><h2>My Submissions</h2></div>
 {% for snippet in snippets %}
-
 <div class="snippet-card">
     <div class="snippet-title">{{snippet}}</div>
     <div class="snippet-language">{{snippet.language}}</div>

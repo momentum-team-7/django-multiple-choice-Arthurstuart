@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h3>Add a Snippet!</h3>
 <form action= "{% url 'add-snippet' %}" method = "post">
     {% csrf_token %}
     {{ form.as_p }}

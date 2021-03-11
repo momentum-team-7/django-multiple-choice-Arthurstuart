@@ -79,3 +79,7 @@ textarea {
     height: 15rem;
     white-space: pre-wrap
 }
+
+.logo {
+    text-align: right;
+}
