@@ -13,7 +13,13 @@ def snippet_list(request):
 
 def homepage_render(request):
     snippets = Snippet.objects.all()    
-    return render(request, 'user_home.html', {"snippets":snippets})    
+    return render(request, 'user_home.html', {"snippets":snippets})
+
+
+# @login_required
+# def new_homepage_render(request):
+#     snippets =
+#     return render(request, 'user_home.html', {"snippets":snippets, })
 
 
 @login_required
@@ -82,9 +88,10 @@ def user_list_count(request):
     .annotate(num_snippets=Count('snippets_authored')) \
     .order_by("-num_snippets")
     top_user  = top_users[0]
-    next_five = top_users[1:4]
-    top_users = top_users[:10]
-    return render(request, 'user_list.html',{'top_user':top_user, 'next_five':next_five})
+    next_four = top_users[1:4]
+    return render(request, 'user_list.html',{'top_user':top_user, 'next_four':next_four})
+
+# User.objects.all().annotate(num_snippets=Count('snippets_authored')).order_by("-num_snippets")
 
 
 def save_snippet(request, pk):
