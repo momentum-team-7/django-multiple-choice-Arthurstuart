@@ -88,9 +88,8 @@ def user_list_count(request):
     .annotate(num_snippets=Count('snippets_authored')) \
     .order_by("-num_snippets")
     top_user  = top_users[0]
-    next_five = top_users[1:4]
-    # top_users = top_users[:10]
-    return render(request, 'user_list.html',{'top_user':top_user, 'next_five':next_five})
+    next_four = top_users[1:4]
+    return render(request, 'user_list.html',{'top_user':top_user, 'next_four':next_four})
 
 # User.objects.all().annotate(num_snippets=Count('snippets_authored')).order_by("-num_snippets")
 
